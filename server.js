@@ -1,5 +1,5 @@
 const express =require('express');
-const mongoose=require('mongodb');
+const mongoose=require('mongoose');
 const bodyParser=require('body-parser');
 
 const items=require('./routes/api/items');
@@ -14,9 +14,7 @@ const db=require('./config/keys').mongoURI;
 
 //Connect to Mongo
 //Promise Base
-mongoose.connect(db)
-    .then(()=>console.log('MongoDB Connected'))
-    .catch(err=>console.log(err));
+mongoose.connect(db,{ useNewUrlParser: true,useUnifiedTopology: true },()=>console.log('connected to Db'))
 
 //Use Routes
 app.use('/api/items',items);
